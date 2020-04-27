@@ -662,7 +662,7 @@ declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
 	export interface PolygonLayerProps<D> extends CompositeLayerProps<D> {
 		data: D[];
 		elevationScale?: number;
-		extruded: boolean;
+		extruded?: boolean;
 		filled?: boolean;
 		lineDashJustified?: boolean;
 		lineJointRounded?: boolean;
@@ -907,7 +907,8 @@ declare module '@deck.gl/layers/text-layer/text-layer' {
     import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
 	export type TextAnchor = 'start' | 'middle' | 'end';
-	export type AlignmentBaseline = 'top' | 'center' | 'bottom';
+  export type AlignmentBaseline = 'top' | 'center' | 'bottom';
+  export type SizeUnits = 'meters' | 'pixels';
 	export interface TextLayerProps<D>  extends CompositeLayerProps<D> {
 		characterSet?: string | string[];
 		fontFamily?: string;
@@ -924,6 +925,7 @@ declare module '@deck.gl/layers/text-layer/text-layer' {
 		getPixelOffset?: (x: D) => number[];
     sizeScale?: number;
     billboard?: boolean;
+    sizeUnits?: SizeUnits;
 	}
 	export default class TextLayer<D> extends CompositeLayer<D> {
 		constructor(props: TextLayerProps<D>);

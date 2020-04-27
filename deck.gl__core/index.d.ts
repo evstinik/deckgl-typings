@@ -980,6 +980,12 @@ declare module '@deck.gl/core/lib/layer' {
     colorFormat?: "RGBA" | "RGB";
     numInstances?: number;
     dataComparator?: (oldData: DataSet<D>, newData: DataSet<D>) => boolean;
+    updateTriggers?: {
+      getFillColor: any;
+      getElevation: any;
+      getLineColor: any;
+      getLineWidth: any;
+    };
   }
 	export default class Layer<D> extends Component {
 		constructor(props: LayerProps<D>);
