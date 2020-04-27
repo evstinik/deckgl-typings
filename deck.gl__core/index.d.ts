@@ -981,10 +981,10 @@ declare module '@deck.gl/core/lib/layer' {
     numInstances?: number;
     dataComparator?: (oldData: DataSet<D>, newData: DataSet<D>) => boolean;
     updateTriggers?: {
-      getFillColor: any;
-      getElevation: any;
-      getLineColor: any;
-      getLineWidth: any;
+      getFillColor?: any;
+      getElevation?: any;
+      getLineColor?: any;
+      getLineWidth?: any;
     };
   }
 	export default class Layer<D> extends Component {
