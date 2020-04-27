@@ -922,7 +922,8 @@ declare module '@deck.gl/layers/text-layer/text-layer' {
 		getTextAnchor?: (x: D) => TextAnchor;
 		getAlignmentBaseline?: (x: D) => AlignmentBaseline;
 		getPixelOffset?: (x: D) => number[];
-		sizeScale?: number;
+    sizeScale?: number;
+    billboard?: boolean;
 	}
 	export default class TextLayer<D> extends CompositeLayer<D> {
 		constructor(props: TextLayerProps<D>);

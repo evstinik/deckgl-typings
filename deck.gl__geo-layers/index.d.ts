@@ -105,15 +105,16 @@ declare module '@deck.gl/geo-layers/tile-layer/utils/tile-cache' {
 declare module '@deck.gl/geo-layers/tile-layer/tile-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
-    export interface TileLayerProps<D> extends LayerProps<D> {
-        maxZoom?: number | null;
-        minZoom?: number;
-        maxCacheSize?: number | null;
-        onViewportLoaded?: (data: D[]) => void;
-        getTileData?: Function;
-        onTileError?: Function;
-        renderSubLayers?: Function;
-    }
+      import { GeoJsonLayerProps } from "@deck.gl/layers/geojson-layer/geojson-layer";
+      export interface TileLayerProps<D> extends LayerProps<D>, GeoJsonLayerProps<D> {
+          maxZoom?: number | null;
+          minZoom?: number;
+          maxCacheSize?: number | null;
+          onViewportLoaded?: (data: D[]) => void;
+          getTileData?: Function;
+          onTileError?: Function;
+          renderSubLayers?: Function;
+      }
 	export default class TileLayer<D> extends CompositeLayer<D> {
     	constructor(props: TileLayerProps<D>);
 		initializeState(): void;

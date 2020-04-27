@@ -958,28 +958,29 @@ declare module '@deck.gl/core/lib/layer' {
 	// | AsyncIterable ToDo: Add AsyncIterable
 	// | { length: number } Todo: Support non-iterable objects, see deck.gl docs: /docs/developer-guide/using-layers.md#accessors
 	export interface LayerProps<D> {
-		coordinateSystem?: number;
-		coordinateOrigin?: [number, number];
-		wrapLongitude?: boolean;
-		id?: string;
-		data?: DataSet<D> | Promise<DataSet<D>> | string;
-		visible?: boolean;
-		opacity?: number;
-		transitions?: { [attributeGetter: string]: TransitionTiming };
-		pickable?: boolean;
-		autoHighlight?: boolean;
-		highlightColor?: RGBAColor;
-		highlightedObjectIndex?: number;
-		onClick?: LayerInputHandler;
-		onHover?: LayerInputHandler;
-		onDragStart?: LayerInputHandler;
-		onDrag?: LayerInputHandler;
-		onDragEnd?: LayerInputHandler;
-		lightSettings?: LightSettings;
-		positionFormat?: 'XYZ' | 'XY';
-		colorFormat?: 'RGBA' | 'RGB';
-		numInstances?: number;
-	}
+    coordinateSystem?: number;
+    coordinateOrigin?: [number, number];
+    wrapLongitude?: boolean;
+    id?: string;
+    data?: DataSet<D> | Promise<DataSet<D>> | string;
+    visible?: boolean;
+    opacity?: number;
+    transitions?: { [attributeGetter: string]: TransitionTiming };
+    pickable?: boolean;
+    autoHighlight?: boolean;
+    highlightColor?: RGBAColor;
+    highlightedObjectIndex?: number;
+    onClick?: LayerInputHandler;
+    onHover?: LayerInputHandler;
+    onDragStart?: LayerInputHandler;
+    onDrag?: LayerInputHandler;
+    onDragEnd?: LayerInputHandler;
+    lightSettings?: LightSettings;
+    positionFormat?: "XYZ" | "XY";
+    colorFormat?: "RGBA" | "RGB";
+    numInstances?: number;
+    dataComparator?: (oldData: DataSet<D>, newData: DataSet<D>) => boolean;
+  }
 	export default class Layer<D> extends Component {
 		constructor(props: LayerProps<D>);
 		toString(): string;
@@ -2065,8 +2066,8 @@ declare module '@deck.gl/core/lib/deck' {
 		style?: {};
 		canvas?: HTMLCanvasElement | string;
 
-		width: number | string;
-		height: number | string;
+		width?: number | string;
+		height?: number | string;
 
 		// layer/view/controller settings
 		layers: Layer<any>[];
