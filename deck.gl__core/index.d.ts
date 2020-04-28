@@ -880,13 +880,13 @@ declare module '@deck.gl/core/lifecycle/component-state' {
 declare module '@deck.gl/core/lifecycle/component' {
 	import ShaderCache from '@luma.gl/core/lib/shader-cache';
 
-	export default class Component {
+	export default class Component<Props = any> {
 		constructor();
-		clone(newProps: any): any;
+		clone(newProps: Props): any;
 		readonly stats: any;
 		_initState(): void;
 
-		props: any;
+		props: Props;
 
 		/**	
 		* The layer's id, used for matching with layers from last render cycle	
@@ -987,7 +987,7 @@ declare module '@deck.gl/core/lib/layer' {
       getLineWidth?: any;
     };
   }
-	export default class Layer<D> extends Component {
+	export default class Layer<D> extends Component<LayerProps<D>> {
 		constructor(props: LayerProps<D>);
 		toString(): string;
 		setState(updateObject: any): void;
