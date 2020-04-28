@@ -987,8 +987,8 @@ declare module '@deck.gl/core/lib/layer' {
       getLineWidth?: any;
     };
   }
-	export default class Layer<D> extends Component<LayerProps<D>> {
-		constructor(props: LayerProps<D>);
+	export default class Layer<D, Props extends LayerProps<D> = LayerProps<D>> extends Component<Props> {
+		constructor(props: Props);
 		toString(): string;
 		setState(updateObject: any): void;
 		setNeedsRedraw(redraw?: boolean): void;
@@ -1090,8 +1090,8 @@ declare module '@deck.gl/core/lib/composite-layer' {
 	export interface CompositeLayerProps<D> extends LayerProps<D> {
 		_subLayerProps?: Object,
 	}
-	export default class CompositeLayer<D> extends Layer<D> {
-		constructor(props: CompositeLayerProps<D>);
+	export default class CompositeLayer<D, Props extends CompositeLayerProps<D> = CompositeLayerProps<D>> extends Layer<D, Props> {
+		constructor(props: Props);
 		readonly isComposite: boolean;
 		getSubLayers(): any;
 		initializeState(): void;
