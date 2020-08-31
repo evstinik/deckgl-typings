@@ -1443,73 +1443,77 @@ declare module '@deck.gl/core/lib/view-manager' {
 declare module '@deck.gl/core/viewports/web-mercator-viewport' {
 	import Viewport from '@deck.gl/core/viewports/viewport';
 	export default class WebMercatorViewport extends Viewport {
-		/**
-		* @classdesc
-		* Creates view/projection matrices from mercator params
-		* Note: The Viewport is immutable in the sense that it only has accessors.
-		* A new viewport instance should be created if any parameters have changed.
-		*/
-		constructor(opts?: {});
-		/**
-		* Converts a meter offset to a lnglat offset
-		*
-		* Note: Uses simple linear approximation around the viewport center
-		* Error increases with size of offset (roughly 1% per 100km)
-		*
-		* @param {[Number,Number]|[Number,Number,Number]) xyz - array of meter deltas
-		* @return {[Number,Number]|[Number,Number,Number]) - array of [lng,lat,z] deltas
-		*/
-		metersToLngLatDelta(xyz: any): any[];
-		/**
-		* Converts a lnglat offset to a meter offset
-		*
-		* Note: Uses simple linear approximation around the viewport center
-		* Error increases with size of offset (roughly 1% per 100km)
-		*
-		* @param {[Number,Number]|[Number,Number,Number]) deltaLngLatZ - array of [lng,lat,z] deltas
-		* @return {[Number,Number]|[Number,Number,Number]) - array of meter deltas
-		*/
-		lngLatDeltaToMeters(deltaLngLatZ: any): any[];
-		/**
-		* Add a meter delta to a base lnglat coordinate, returning a new lnglat array
-		*
-		* Note: Uses simple linear approximation around the viewport center
-		* Error increases with size of offset (roughly 1% per 100km)
-		*
-		* @param {[Number,Number]|[Number,Number,Number]) lngLatZ - base coordinate
-		* @param {[Number,Number]|[Number,Number,Number]) xyz - array of meter deltas
-		* @return {[Number,Number]|[Number,Number,Number]) array of [lng,lat,z] deltas
-		*/
-		addMetersToLngLat(lngLatZ: any, xyz: any): any;
-		/**
-		* Get the map center that place a given [lng, lat] coordinate at screen
-		* point [x, y]
-		*
-		* @param {Array} lngLat - [lng,lat] coordinates
-		*   Specifies a point on the sphere.
-		* @param {Array} pos - [x,y] coordinates
-		*   Specifies a point on the screen.
-		* @return {Array} [lng,lat] new map center.
-		*/
-		getMapCenterByLngLatPosition({ lngLat, pos }: {
-			lngLat: any;
-			pos: any;
-		}): any;
-		getLocationAtPoint({ lngLat, pos }: {
-			lngLat: any;
-			pos: any;
-		}): any;
-		/**
-		* Returns a new viewport that fit around the given rectangle.
-		* Only supports non-perspective mode.
-		* @param {Array} bounds - [[lon, lat], [lon, lat]]
-		* @param {Number} [options.padding] - The amount of padding in pixels to add to the given bounds.
-		* @param {Array} [options.offset] - The center of the given bounds relative to the map's center,
-		*    [x, y] measured in pixels.
-		* @returns {WebMercatorViewport}
-		*/
-		fitBounds(bounds: any, options?: {}): WebMercatorViewport;
-	}
+    metersPerPixel: number;
+    latitude: number;
+    longitude: number;
+    zoom: number;
+    /**
+     * @classdesc
+     * Creates view/projection matrices from mercator params
+     * Note: The Viewport is immutable in the sense that it only has accessors.
+     * A new viewport instance should be created if any parameters have changed.
+     */
+    constructor(opts?: {});
+    /**
+     * Converts a meter offset to a lnglat offset
+     *
+     * Note: Uses simple linear approximation around the viewport center
+     * Error increases with size of offset (roughly 1% per 100km)
+     *
+     * @param {[Number,Number]|[Number,Number,Number]) xyz - array of meter deltas
+     * @return {[Number,Number]|[Number,Number,Number]) - array of [lng,lat,z] deltas
+     */
+    metersToLngLatDelta(xyz: any): any[];
+    /**
+     * Converts a lnglat offset to a meter offset
+     *
+     * Note: Uses simple linear approximation around the viewport center
+     * Error increases with size of offset (roughly 1% per 100km)
+     *
+     * @param {[Number,Number]|[Number,Number,Number]) deltaLngLatZ - array of [lng,lat,z] deltas
+     * @return {[Number,Number]|[Number,Number,Number]) - array of meter deltas
+     */
+    lngLatDeltaToMeters(deltaLngLatZ: any): any[];
+    /**
+     * Add a meter delta to a base lnglat coordinate, returning a new lnglat array
+     *
+     * Note: Uses simple linear approximation around the viewport center
+     * Error increases with size of offset (roughly 1% per 100km)
+     *
+     * @param {[Number,Number]|[Number,Number,Number]) lngLatZ - base coordinate
+     * @param {[Number,Number]|[Number,Number,Number]) xyz - array of meter deltas
+     * @return {[Number,Number]|[Number,Number,Number]) array of [lng,lat,z] deltas
+     */
+    addMetersToLngLat(lngLatZ: any, xyz: any): any;
+    /**
+     * Get the map center that place a given [lng, lat] coordinate at screen
+     * point [x, y]
+     *
+     * @param {Array} lngLat - [lng,lat] coordinates
+     *   Specifies a point on the sphere.
+     * @param {Array} pos - [x,y] coordinates
+     *   Specifies a point on the screen.
+     * @return {Array} [lng,lat] new map center.
+     */
+    getMapCenterByLngLatPosition({
+      lngLat,
+      pos,
+    }: {
+      lngLat: any;
+      pos: any;
+    }): any;
+    getLocationAtPoint({ lngLat, pos }: { lngLat: any; pos: any }): any;
+    /**
+     * Returns a new viewport that fit around the given rectangle.
+     * Only supports non-perspective mode.
+     * @param {Array} bounds - [[lon, lat], [lon, lat]]
+     * @param {Number} [options.padding] - The amount of padding in pixels to add to the given bounds.
+     * @param {Array} [options.offset] - The center of the given bounds relative to the map's center,
+     *    [x, y] measured in pixels.
+     * @returns {WebMercatorViewport}
+     */
+    fitBounds(bounds: any, options?: {}): WebMercatorViewport;
+  }
 
 }
 declare module '@deck.gl/core/transitions/transition-interpolator' {
@@ -2094,7 +2098,7 @@ declare module '@deck.gl/core/lib/deck' {
 		// Callbacks
 		getCursor?: (interactiveState: InteractiveState) => string;
 		onWebGLInitialized?: (gl: WebGLRenderingContext) => any;
-		onResize?: () => any;
+		onResize?: (size: { width: number, height: number }) => any;
 		onViewStateChange?: (viewState: any) => any;
 		onBeforeRender?: () => any;
 		onAfterRender?: () => any;

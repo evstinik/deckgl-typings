@@ -1,3 +1,5 @@
+import { SizeUnits } from "@deck.gl/layers/text-layer/text-layer";
+
 //typings for @deck.gl/layers v7.3.3
 declare module '@deck.gl/layers/arc-layer/arc-layer-vertex.glsl' {
 	const _default: string;
@@ -191,6 +193,8 @@ declare module '@deck.gl/layers/icon-layer/icon-layer' {
 		iconMapping?: IconMapping,
 		sizeScale?: number,
 		fp64?: number,
+		billboard?: boolean,
+		sizeUnits?: SizeUnits,
 
 		/*
 		*  returns anchor position of the icon, in [lng, lat, z]
@@ -605,17 +609,18 @@ declare module '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer' {
     import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
 	export type Polygon = number[][] | number[][][];
 	export interface SolidPolygonLayerProps<D> extends LayerProps<D> {
-		filled?: boolean;
-		extruded?: boolean;
-		material?: Material;
-		positionFormat?: "XYZ" | "XY";
-		wireframe?: boolean;
-		elevationScale?: number;
-		getElevation?: ((x: D) => number) | number;
-		getFillColor?: ((x: D) => RGBAColor) | RGBAColor;
-		getLineColor?: ((x: D) => RGBAColor) | RGBAColor;
-		getPolygon?: (x: D) => Polygon;
-	}
+    filled?: boolean;
+    extruded?: boolean;
+    material?: Material;
+    positionFormat?: "XYZ" | "XY";
+    wireframe?: boolean;
+    elevationScale?: number;
+    getElevation?: ((x: D) => number) | number;
+    getFillColor?: ((x: D) => RGBAColor) | RGBAColor;
+    getLineColor?: ((x: D) => RGBAColor) | RGBAColor;
+    getPolygon?: (x: D) => Polygon;
+    getDashArray?: [number, number] | ((x: D) => [number, number]);
+  }
 	export default class SolidPolygonLayer<D> extends Layer<D> {
 		constructor(props: SolidPolygonLayerProps<D>);
 		getShaders(vs: any): any;
@@ -660,27 +665,28 @@ declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
     import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
 	export interface PolygonLayerProps<D> extends CompositeLayerProps<D> {
-		data: D[];
-		elevationScale?: number;
-		extruded?: boolean;
-		filled?: boolean;
-		lineDashJustified?: boolean;
-		lineJointRounded?: boolean;
-		lineMiterLimit?: number;
-		lineWidthMaxPixels?: number;
-		lineWidthMinPixels?: number;
-		lineWidthScale?: boolean;
-		lineWidthUnits?: string;
-		material?: PhongMaterial;
-		positionFormat?: "XYZ" | "XY";
-		stroked: boolean;
-		wireframe?: boolean;
-		getElevation?: ((x: D) => number) | number;
-		getFillColor?: ((x: D) => RGBAColor) | RGBAColor;
-		getLineColor?: ((x: D) => RGBAColor) | RGBAColor;
-		getLineWidth?: ((x: D) => number) | number;
-		getPolygon?: (x: D) => Polygon;
-	}
+    data: D[];
+    elevationScale?: number;
+    extruded?: boolean;
+    filled?: boolean;
+    lineDashJustified?: boolean;
+    lineJointRounded?: boolean;
+    lineMiterLimit?: number;
+    lineWidthMaxPixels?: number;
+    lineWidthMinPixels?: number;
+    lineWidthScale?: boolean;
+    lineWidthUnits?: string;
+    material?: PhongMaterial;
+    positionFormat?: "XYZ" | "XY";
+    stroked: boolean;
+    wireframe?: boolean;
+    getElevation?: ((x: D) => number) | number;
+    getFillColor?: ((x: D) => RGBAColor) | RGBAColor;
+    getLineColor?: ((x: D) => RGBAColor) | RGBAColor;
+    getLineWidth?: ((x: D) => number) | number;
+    getPolygon?: (x: D) => Polygon;
+    getDashArray?: [number, number] | ((x: D) => [number, number]);
+  }
 	export default class PolygonLayer<D> extends CompositeLayer<D> {
 		constructor(props: PolygonLayerProps<D>);
 		initializeState(): void;
@@ -909,24 +915,25 @@ declare module '@deck.gl/layers/text-layer/text-layer' {
 	export type TextAnchor = 'start' | 'middle' | 'end';
   export type AlignmentBaseline = 'top' | 'center' | 'bottom';
   export type SizeUnits = 'meters' | 'pixels';
-	export interface TextLayerProps<D>  extends CompositeLayerProps<D> {
-		characterSet?: string | string[];
-		fontFamily?: string;
-		fontSettings?: FontSettings;
-		fontWeight?: number | string;
-		fp64?: boolean;
-		getColor?: ((x: D) => RGBAColor) | RGBAColor;
-		getText?: (x: D) => string;
-		getPosition?: (x: D) => [number, number];
-		getSize?: ((x: D) => number) | number;
-		getAngle?: ((x: D) => number) | number;
-		getTextAnchor?: (x: D) => TextAnchor;
-		getAlignmentBaseline?: (x: D) => AlignmentBaseline;
-		getPixelOffset?: (x: D) => number[];
+	export interface TextLayerProps<D> extends CompositeLayerProps<D> {
+    characterSet?: string | string[];
+    fontFamily?: string;
+    fontSettings?: FontSettings;
+    fontWeight?: number | string;
+    fp64?: boolean;
+    getColor?: ((x: D) => RGBAColor) | RGBAColor;
+    getText?: (x: D) => string;
+    getPosition?: (x: D) => [number, number];
+    getSize?: ((x: D) => number) | number;
+    getAngle?: ((x: D) => number) | number;
+    getTextAnchor?: (x: D) => TextAnchor;
+    getAlignmentBaseline?: (x: D) => AlignmentBaseline;
+    getPixelOffset?: (x: D) => number[];
     sizeScale?: number;
     billboard?: boolean;
     sizeUnits?: SizeUnits;
-	}
+    backgroundColor?: RGBAColor;
+  }
 	export default class TextLayer<D> extends CompositeLayer<D> {
 		constructor(props: TextLayerProps<D>);
 		initializeState(): void;
