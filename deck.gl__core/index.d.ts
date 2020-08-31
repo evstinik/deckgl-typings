@@ -2105,6 +2105,10 @@ declare module '@deck.gl/core/lib/deck' {
 		onClick?: <D>(info: PickInfo<D>, pickedInfos: PickInfo<D>[], e: MouseEvent) => any;
 		onHover?: <D>(info: PickInfo<D>, pickedInfos: PickInfo<D>[], e: MouseEvent) => any;
 		onLoad?: () => any;
+		onDrag?: <D>(info: PickInfo<D>) => void;
+		onDragStart?: <D>(info: PickInfo<D>) => void;
+		onDragEnd?: <D>(info: PickInfo<D>) => void;
+		getTooltip?: <D>(info: PickInfo<D>) => any;
 
 		// Debug settings
 		debug?: boolean;

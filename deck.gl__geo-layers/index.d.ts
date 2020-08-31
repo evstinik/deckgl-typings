@@ -113,7 +113,8 @@ declare module '@deck.gl/geo-layers/tile-layer/tile-layer' {
           onViewportLoaded?: (data: D[]) => void;
           getTileData?: Function;
           onTileError?: Function;
-          renderSubLayers?: Function;
+					renderSubLayers?: Function;
+					stroked?: boolean;
       }
 	export default class TileLayer<D> extends CompositeLayer<D> {
     	constructor(props: TileLayerProps<D>);
