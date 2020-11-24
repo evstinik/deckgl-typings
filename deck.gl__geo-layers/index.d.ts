@@ -215,7 +215,8 @@ declare module "@deck.gl/geo-layers/tile-layer/tileset-2d" {
 declare module "@deck.gl/geo-layers/tile-layer/tile-layer" {
 	import { CompositeLayer, Layer } from "@deck.gl/core";
 	import { LayerProps } from "@deck.gl/core/lib/layer";
-	export interface TileLayerProps<D> extends LayerProps<D> {
+	import { GeoJsonLayerProps } from "@deck.gl/layers";
+	export interface TileLayerProps<D> extends LayerProps<D>, GeoJsonLayerProps<D> {
     //Data Options
     getTileData?: (tile: {
       x: number;

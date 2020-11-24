@@ -1160,7 +1160,7 @@ declare module "@deck.gl/core/lib/layer" {
 		transitions?: { [attributeGetter: string]: TransitionTiming };
 
 		//Extensions
-		getDashArray?: () => [number, number]
+		getDashArray?: (value: D) => [number, number]
 	}
 	export interface DefaultPropType {
 		name: string;
@@ -2242,7 +2242,8 @@ declare module "@deck.gl/core/lib/deck" {
 		object: D;
 		x: number;
 		y: number;
-		coordinate?: {};
+		coordinate?: Position;
+		lngLat?: [number, number];
 	}
 
 	// https://deck.gl/docs/api-reference/core/deck#viewstate
