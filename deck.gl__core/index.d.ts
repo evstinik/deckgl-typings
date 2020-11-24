@@ -2231,6 +2231,7 @@ declare module "@deck.gl/core/lib/deck" {
 	import Viewport from "@deck.gl/core/viewports/viewport";
 	import TransitionInterpolator from "@deck.gl/core/transitions/transition-interpolator";
 	import { TRANSITION_EVENTS } from "@deck.gl/core/controllers/transition-manager";
+	import { Position } from "@deck.gl/core/utils/positions";
 
 	export interface InteractiveState {
 		isDragging: boolean;
