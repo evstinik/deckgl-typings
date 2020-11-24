@@ -51,24 +51,25 @@ declare module "@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer" {
 	import Texture2D from "@luma.gl/webgl/classes/texture-2d";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
 	import { Position3D } from "@deck.gl/core/utils/positions";
+	import { Geometry } from "@luma.gl/core";
 	export interface SimpleMesh {
 		positions: Float32Array;
 		normals: Float32Array;
 		texCoords: Float32Array;
 	}
 	export interface SimpleMeshLayerProps<D> extends LayerProps<D> {
-		mesh: SimpleMesh;
-		texture?: Texture2D | HTMLImageElement | string;
-		sizeScale?: number;
-		wireframe?: boolean;
-		material?: any;
-		getPosition?: (d: D) => Position3D;
-		getColor?: ((d: D) => RGBAColor) | RGBAColor;
-		getOrientation?: ((d: D) => Coordinates) | Position3D;
-		getScale?: ((d: D) => Position3D) | Position3D;
-		getTranslation?: ((d: D) => Position3D) | Position3D;
-		getTransformMatrix?: ((d: D) => number[][]) | number[][];
-	}
+    mesh: SimpleMesh | Geometry;
+    texture?: Texture2D | HTMLImageElement | string;
+    sizeScale?: number;
+    wireframe?: boolean;
+    material?: any;
+    getPosition?: (d: D) => Position3D;
+    getColor?: ((d: D) => RGBAColor) | RGBAColor;
+    getOrientation?: ((d: D) => Position3D) | Position3D;
+    getScale?: ((d: D) => Position3D) | Position3D;
+    getTranslation?: ((d: D) => Position3D) | Position3D;
+    getTransformMatrix?: ((d: D) => number[][]) | number[][];
+  }
 	export default class SimpleMeshLayer<D,P extends SimpleMeshLayerProps<D> = SimpleMeshLayerProps<D>> extends Layer<D,P> {
 		getShaders(): any;
 		initializeState(params: any): void;
@@ -105,29 +106,29 @@ declare module "@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer" {
 	import { RGBAColor } from "@deck.gl/core/utils/color";
 	import { Position3D } from "@deck.gl/core/utils/positions";
 	export interface ScenegraphLayerProps<D> extends LayerProps<D> {
-		//Mesh
-		scenegraph: URL | ScenegraphNode | Promise<ScenegraphNode>;
+    //Mesh
+    scenegraph: string | ScenegraphNode | Promise<ScenegraphNode>;
 
-		//Render Options
-		sizeScale?: number;
-		_animations?: Object;
-		getScene?: (scenegraph: ScenegraphNode) => ScenegraphNode;
-		getAnimator?: (scenegraph: ScenegraphNode) => any;
-		_lighting?: string;
+    //Render Options
+    sizeScale?: number;
+    _animations?: Object;
+    getScene?: (scenegraph: ScenegraphNode) => ScenegraphNode;
+    getAnimator?: (scenegraph: ScenegraphNode) => any;
+    _lighting?: string;
 
-		//Data Accessors
-		getPosition?: (d: D) => Position3D;
-		getColor?: ((d: D) => RGBAColor) | RGBAColor;
-		getOrientation?: ((d: D) => Coordinates) | Coordinates;
-		getScale?: ((d: D) => Coordinates) | Coordinates;
-		getTranslation?: ((d: D) => Coordinates) | Coordinates;
-		getTransformMatrix?: ((d: D) => number[][]) | number[][];
-		sizeMinPixels?: number;
-		sizeMaxPixels?: number;
- 
-		//Experimental
-		_imageBasedLightingEnvironment?: any;
-	}
+    //Data Accessors
+    getPosition?: (d: D) => Position3D;
+    getColor?: ((d: D) => RGBAColor) | RGBAColor;
+    getOrientation?: ((d: D) => Position3D) | Position3D;
+    getScale?: ((d: D) => Position3D) | Position3D;
+    getTranslation?: ((d: D) => Position3D) | Position3D;
+    getTransformMatrix?: ((d: D) => number[][]) | number[][];
+    sizeMinPixels?: number;
+    sizeMaxPixels?: number;
+
+    //Experimental
+    _imageBasedLightingEnvironment?: any;
+  }
 	export default class ScenegraphLayer <D,P extends ScenegraphLayerProps<D> = ScenegraphLayerProps<D>> extends Layer<D,P> {
 		constructor(props: ScenegraphLayerProps<D>);
 		initializeState(params: any): void;

@@ -216,32 +216,32 @@ declare module "@deck.gl/geo-layers/tile-layer/tile-layer" {
 	import { CompositeLayer, Layer } from "@deck.gl/core";
 	import { LayerProps } from "@deck.gl/core/lib/layer";
 	export interface TileLayerProps<D> extends LayerProps<D> {
-		//Data Options
-		getTileData?: (tile: {
-			x: number;
-			y: number;
-			z: number;
-			url: string;
-			bbox: any;
-		}) => D[];
-		tileSize?: number;
-		maxZoom?: number | null;
-		minZoom?: number;
-		maxCacheSize?: number;
-		maxCacheByteSize?: number;
-		refinementStrategy?: "best-available" | "no-overlap" | "never";
-		maxRequests?: number;
-		extent?: [number, number, number, number];
+    //Data Options
+    getTileData?: (tile: {
+      x: number;
+      y: number;
+      z: number;
+      url: string;
+      bbox: any;
+    }) => D[] | Promise<D[]>;
+    tileSize?: number;
+    maxZoom?: number | null;
+    minZoom?: number;
+    maxCacheSize?: number;
+    maxCacheByteSize?: number;
+    refinementStrategy?: "best-available" | "no-overlap" | "never";
+    maxRequests?: number;
+    extent?: [number, number, number, number];
 
-		//Render Options
-		renderSubLayers?: (props: any) => Layer<any> | Layer<any>[];
-		zRange?: [number, number];
+    //Render Options
+    renderSubLayers?: (props: any) => Layer<any> | Layer<any>[];
+    zRange?: [number, number];
 
-		//Callbacks
-		onViewportLoad?: (data: D[]) => void;
-		onTileLoad?: (tile: D) => void;
-		onTileError?: (error: Error) => void;
-	}
+    //Callbacks
+    onViewportLoad?: (data: D[]) => void;
+    onTileLoad?: (tile: D) => void;
+    onTileError?: (error: Error) => void;
+  }
 	export default class TileLayer<D, P extends TileLayerProps<D> = TileLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: TileLayerProps<D>);
 		initializeState(params: any): void;

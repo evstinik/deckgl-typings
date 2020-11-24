@@ -1158,6 +1158,9 @@ declare module "@deck.gl/core/lib/layer" {
 		parameters?: () => any;
 		getPolygonOffset?: (uniform: any) => [number, number];
 		transitions?: { [attributeGetter: string]: TransitionTiming };
+
+		//Extensions
+		getDashArray?: () => [number, number]
 	}
 	export interface DefaultPropType {
 		name: string;
